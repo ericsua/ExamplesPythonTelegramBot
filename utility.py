@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import logging
 
 def import_url_csv(url_csv):	
 	import csv
@@ -16,12 +17,17 @@ def import_url_json(url_json):
 
 def save_user_variables(user_variables, outputfile):
 	import json
-	print("Saving user variables")
+	logging.info("Saving user variables")
 	with open(outputfile,'w') as f:
 		json.dump(user_variables, f, sort_keys=True, indent=4)
 
 def load_user_variables(input_file):
 	import json
-	print("Loading user variables")
+	logging.info("Loading user variables")
 	with open(input_file,'r') as f:
-		return json.load(f)
+		try:
+			vars = json.load(f)
+		except json.decoder.JSONDecodeError:
+			logging.warning('input file was currupted, resetting it to empty')
+			return {}
+		return vars
