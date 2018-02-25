@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-myToken = '<bot-token>'
+myToken = None # inser here you bot token as a string
