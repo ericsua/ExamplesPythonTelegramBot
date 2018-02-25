@@ -15,13 +15,13 @@ def import_url_json(url_json):
 	r = requests.get(url_json)
 	return r.json()
 
-def save_user_variables(user_variables, outputfile):
+def save_users_vars(users_vars, outputfile):
 	import json
 	logging.info("Saving user variables")
 	with open(outputfile,'w') as f:
-		json.dump(user_variables, f, sort_keys=True, indent=4)
+		json.dump(users_vars, f, sort_keys=True, indent=4)
 
-def load_user_variables(input_file):
+def load_users_vars(input_file):
 	import json
 	logging.info("Loading user variables")
 	with open(input_file,'r') as f:
