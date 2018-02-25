@@ -8,15 +8,17 @@ from bot_manager import (send_message, send_photo, send_location,
 
 ##############################
 # STATES FUNCTIONS
-# * each functions' name has to start with 'state_X' where X is the name of the state
-# * it is split in two parts if message is None (first time user is sent to this state) and ELSE when it replies to the option within this state
+# * each function's name has to start with 'state_X' where X is the name of the state
+# * each function is split in two parts: 
+#   - if bot_turn: bot's turn to say something
+#   - else: the user said something
 ##############################
 
-'''
-state 0 is the initial state by default (see bot_manager) and must be defined
-This is where the bot sends the user after s/he starts the bot (or types the command /start)
-'''
 def state_0(user, message):
+    """
+    state 0 is the initial state by default (see bot_manager) and must be defined
+    This is where the bot sends the user after s/he starts the bot (or types the command /start)
+    """
     bot_turn = message is None
     if bot_turn:
         reply_text = 'You are in the initial state'
