@@ -147,7 +147,7 @@ def send_ricetta(user, ricetta_id):
     if r is None:
         reply_text = "Nessuna ricetta trovata."
     else:
-        ricette_preferite = get_user_var_value(user, 'RICETTE_PREFERITE')
+        ricette_preferite = get_user_var_value(user, 'RICETTE_PREFERITE', init_value=[])
         aggiungi_rimuovi = '/rimuoviRicettaDaPreferiti' if r['RecipeID'] in ricette_preferite else '/aggiungiRicettaInPreferiti'
         reply_text = (
             "*Titolo*: {}\n"
@@ -162,10 +162,7 @@ def aggiungi_ricetta_in_preferiti(user, ricetta_id):
     if r is None:
         reply_text = "Nessuna ricetta trovata."
     else:
-        ricette_preferite = get_user_var_value(user, 'RICETTE_PREFERITE')
-        if not ricette_preferite:
-            ricette_preferite = []
-            set_user_var_value(user, 'RICETTE_PREFERITE', ricette_preferite)
+        ricette_preferite = get_user_var_value(user, 'RICETTE_PREFERITE', init_value=[])
         ricette_preferite.append(ricetta_id)
         ricette_preferite = sorted(set(ricette_preferite))
         reply_text = ('Ricetta aggiunta in preferiti ({}).'.format(r['Title']))
@@ -176,10 +173,7 @@ def rimuovi_ricetta_da_preferiti(user, ricetta_id):
     if r is None:
         reply_text = "Nessuna ricetta trovata."
     else:
-        ricette_preferite = get_user_var_value(user, 'RICETTE_PREFERITE')
-        if not ricette_preferite:
-            ricette_preferite = []
-            set_user_var_value(user, 'RICETTE_PREFERITE', ricette_preferite)
+        ricette_preferite = get_user_var_value(user, 'RICETTE_PREFERITE', init_value=[])
         ricette_preferite.remove(ricetta_id)
         ricette_preferite = sorted(set(ricette_preferite))
         reply_text = ('Ricetta rimossa da preferiti ({}).'.format(r['Title']))

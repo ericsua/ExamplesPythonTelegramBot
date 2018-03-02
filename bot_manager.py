@@ -35,9 +35,12 @@ def get_USERS_VARS(user):
         return None        
     return USERS_VARS[user_id_str]
 
-def get_user_var_value(user, var_name):
+def get_user_var_value(user, var_name, init_value=None):
     user_vars = get_USERS_VARS(user)
     if var_name in user_vars:
+        return user_vars[var_name]
+    if init_value != None:
+        user_vars[var_name] = init_value
         return user_vars[var_name]
     return None
 
